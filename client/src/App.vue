@@ -40,18 +40,29 @@ onMounted(load);
 </script> 
 
 <template>
-  <main>
-    <h1>Items</h1>
-    <form @submit.prevent="save">
-      <input v-model="form.name" placeholder="Name" required>
-      <input v-model="form.description" placeholder="Description" required>
-      <button type="submit">{{ editId ? 'Update' : 'Add' }}</button>
+  <main class="app-container">
+    <h1 class="app-title">Items Manager</h1>
+    
+    <form @submit.prevent="save" class="crud-form">
+      <div class="form-inputs">
+        <input v-model="form.name" placeholder="Name" required class="form-control">
+        <input v-model="form.description" placeholder="Description" required class="form-control">
+      </div>
+      <button type="submit" class="btn btn-submit">
+        {{ editId ? 'Update Item' : 'Add Item' }}
+      </button>
     </form>
-    <ul>
-      <li v-for="item in items" :key="item.id">
-        <strong>{{ item.name }}</strong>: {{ item.description }}
-        <button @click="startEdit(item)">Edit</button>
-        <button @click="remove(item.id)">Delete</button>
+    
+    <ul class="item-list">
+      <li v-for="item in items" :key="item.id" class="item-row">
+        <div class="item-details">
+          <strong class="item-name">{{ item.name }}</strong>
+          <span class="item-desc">{{ item.description }}</span>
+        </div>
+        <div class="item-actions">
+          <button @click="startEdit(item)" class="btn btn-edit">Edit</button>
+          <button @click="remove(item.id)" class="btn btn-delete">Delete</button>
+        </div>
       </li>
     </ul>
   </main>
