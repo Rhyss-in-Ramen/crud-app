@@ -23,7 +23,6 @@ async function save() {
     description: form.value.description,
     price: Number(form.value.price)
   };
-
   console.log('editId:', editId.value);
   console.log('payload:', payload);
 
@@ -35,7 +34,6 @@ async function save() {
       },
       body: JSON.stringify(payload)
     });
-
     console.log(await res.json());
 
     editId.value = null;
@@ -54,7 +52,6 @@ async function save() {
     description: '',
     price: ''
   };
-
   await load();
 }
 function startEdit(item) {
@@ -71,7 +68,6 @@ async function remove(id) {
   await fetch(`${API}/${id}`, {
     method: 'DELETE'
   });
-
   load();
 }
 
@@ -84,28 +80,9 @@ onMounted(load);
 
     <form @submit.prevent="save" class="crud-form">
       <div class="form-inputs">
-        <input
-          v-model="form.name"
-          placeholder="Item Name"
-          required
-          class="form-control"
-        />
-
-        <input
-          v-model="form.description"
-          placeholder="Description"
-          required
-          class="form-control"
-        />
-
-        <input
-          v-model="form.price"
-          type="number"
-          step="0.01"
-          placeholder="Price"
-          required
-          class="form-control"
-        />
+        <input v-model="form.name" placeholder="Item Name" required class="form-control"/>
+        <input v-model="form.description" placeholder="Description" required class="form-control"/>
+        <input v-model="form.price" type="number" step="0.01" placeholder="Price" required class="form-control"/>
       </div>
 
       <button type="submit" class="btn btn-submit">

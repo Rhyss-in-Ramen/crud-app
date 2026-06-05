@@ -7,8 +7,6 @@ const supabase=createClient(
 );
 
 const router = Router();
-
-// Get all items
 router.get('/', async (req, res) => {
     const { data, error } = await supabase.from('items')
     .select('*').order('created_at');
@@ -34,7 +32,6 @@ router.put('/:id', async (req, res) => {
         .select();
 
     if (error) return res.status(500).json({ error });
-
     res.json(data[0]);
 });
 
